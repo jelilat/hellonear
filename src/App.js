@@ -31,6 +31,10 @@ export default function App() {
           .then(nameFromContract => {
             set_name(nameFromContract)
           })
+
+        setImage({
+          src: require('./assets/hello.png')
+        })
       }
     },
 
