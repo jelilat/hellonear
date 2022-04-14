@@ -40,13 +40,17 @@ main {
 }
 
 .main {
-  /* background-image: url(assets/great.png); */
+  /* background-image: url(assets/great.png);
   background-position: center 0.5em;
   background-repeat: no-repeat;
-  background-size: auto 7em;
-  margin-top: 0;
-  padding: 8em 0 0.5em;
+  background-size: auto 7em; */
+  /* padding: 8em 0 0.5em; */
   text-align: center;
+  margin: 0 auto;
+}
+
+img {
+  display: block;
 }
 
 a,
@@ -189,9 +193,9 @@ aside footer *:last-child {
     --shadow: #2a2a2a;
     --light-gray: #444;
   }
-  h1 {
+  /* h1 {
     background-image: url(assets/hello.png);
-  }
+  } */
   input:focus {
     box-shadow: 0 0 10em rgba(255, 255, 255, 0.02) inset;
   }

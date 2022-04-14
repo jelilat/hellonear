@@ -9,6 +9,9 @@ const { networkId } = getConfig(process.env.NODE_ENV || 'development')
 export default function App() {
   // use React Hooks to store name in component state
   const [name, set_name] = React.useState()
+  const [image, setImage] = React.useState({
+    src: require('./assets/great.png') // default image
+  })
 
   // when the user has not yet interacted with the form, disable the button
   const [buttonDisabled, setButtonDisabled] = React.useState(true)
@@ -67,19 +70,20 @@ export default function App() {
         Sign out
       </button>
       <main>
-        <h1 className="main"
+        <img className="main-image" src={image.src} alt="Great!" 
             style={{
-              backgroundImage: require('./assets/great.png')
-            }}>
-          Hello <label
+              margin: '0 auto',
+            }} />
+        <h1 className="main">
+            {name && `Hello `}
+          <label
             htmlFor="name"
             style={{
               color: 'var(--secondary)',
               borderBottom: '2px solid var(--secondary)'
             }}
-          >
-            {name}
-          </label>!
+          > {name}
+          </label> {name && ` !`}
           {' '/* React trims whitespace around tags; insert literal space character when needed */}
           {/* {window.accountId}! */}
           {!name && <label id="greatLabel">You're in 🥳 Great job!</label>}
@@ -103,9 +107,8 @@ export default function App() {
               message: newName
             })
             .then(() => {
-               const mainImage = document.getElementsByClassName('main')[0];
-               mainImage.style.backgroundImage = require('./assets/hello.png');
-
+               const mainImage = document.getElementsByClassName('main-image')[0];
+               mainImage.src = require('./assets/hello.png');
             })
           } catch (e) {
             alert(
@@ -121,6 +124,11 @@ export default function App() {
 
           // update local `name` variable to match persisted value
           set_name(newName)
+
+          //update image
+          setImage({
+            src: require('./assets/hello.png')
+          })
 
           // show Notification
           setShowNotification(true)
@@ -161,6 +169,7 @@ export default function App() {
         </form>
         <div style={{ textAlign: 'center' }}>
           <p>Created by <a href="http://twitter.com/tjelailah">tjelailah</a> with love ❤️</p>
+          <p><a href="https://github.com/jelilat/hellonear/">Github</a></p>
         </div>
       </main>
       {showNotification && <Notification />}
