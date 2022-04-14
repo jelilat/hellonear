@@ -46902,9 +46902,7 @@ function login() {
   // the private key in localStorage.
   window.walletConnection.requestSignIn(nearConfig.contractName);
 }
-},{"near-api-js":"../node_modules/near-api-js/lib/browser-index.js","./config":"config.js"}],"assets/hello.png":[function(require,module,exports) {
-module.exports = "/hello.2741c2c9.png";
-},{}],"../node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
+},{"near-api-js":"../node_modules/near-api-js/lib/browser-index.js","./config":"config.js"}],"../node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
 var bundleURL = null;
 
 function getBundleURLCached() {
@@ -46976,8 +46974,10 @@ var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
-},{"./assets/main.png":[["main.e1fa333c.png","assets/main.png"],"assets/main.png"],"./assets/hello.png":[["hello.2741c2c9.png","assets/hello.png"],"assets/hello.png"],"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"assets/great.png":[function(require,module,exports) {
+},{"./assets/main.png":[["main.e1fa333c.png","assets/main.png"],"assets/main.png"],"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"assets/great.png":[function(require,module,exports) {
 module.exports = "/great.7bed5b54.png";
+},{}],"assets/hello.png":[function(require,module,exports) {
+module.exports = "/hello.2741c2c9.png";
 },{}],"App.js":[function(require,module,exports) {
 "use strict";
 
@@ -47004,7 +47004,12 @@ const {
 
 function App() {
   // use React Hooks to store name in component state
-  const [name, set_name] = _react.default.useState(); // when the user has not yet interacted with the form, disable the button
+  const [name, set_name] = _react.default.useState();
+
+  const [image, setImage] = _react.default.useState({
+    src: require('./assets/great.png') // default image
+
+  }); // when the user has not yet interacted with the form, disable the button
 
 
   const [buttonDisabled, setButtonDisabled] = _react.default.useState(true); // after submitting the form, we want to show Notification
@@ -47059,18 +47064,22 @@ function App() {
         float: 'right'
       },
       onClick: _utils.logout
-    }, "Sign out"), /*#__PURE__*/_react.default.createElement("main", null, /*#__PURE__*/_react.default.createElement("h1", {
-      className: "main",
+    }, "Sign out"), /*#__PURE__*/_react.default.createElement("main", null, /*#__PURE__*/_react.default.createElement("img", {
+      className: "main-image",
+      src: image.src,
+      alt: "Great!",
       style: {
-        backgroundImage: require('./assets/great.png')
+        margin: '0 auto'
       }
-    }, "Hello ", /*#__PURE__*/_react.default.createElement("label", {
+    }), /*#__PURE__*/_react.default.createElement("h1", {
+      className: "main"
+    }, name && `Hello `, /*#__PURE__*/_react.default.createElement("label", {
       htmlFor: "name",
       style: {
         color: 'var(--secondary)',
         borderBottom: '2px solid var(--secondary)'
       }
-    }, name), "!", ' '
+    }, " ", name), " ", name && ` !`, ' '
     /* React trims whitespace around tags; insert literal space character when needed */
     , !name && /*#__PURE__*/_react.default.createElement("label", {
       id: "greatLabel"
@@ -47093,8 +47102,8 @@ function App() {
             // pass the value that the user entered in the name field
             message: newName
           }).then(() => {
-            const mainImage = document.getElementsByClassName('main')[0];
-            mainImage.style.backgroundImage = require('./assets/hello.png');
+            const mainImage = document.getElementsByClassName('main-image')[0];
+            mainImage.src = require('./assets/hello.png');
           });
         } catch (e) {
           alert('Something went wrong! ' + 'Maybe you need to sign out and back in? ' + 'Check your browser console for more info.');
@@ -47105,7 +47114,11 @@ function App() {
         } // update local `name` variable to match persisted value
 
 
-        set_name(newName); // show Notification
+        set_name(newName); //update image
+
+        setImage({
+          src: require('./assets/hello.png')
+        }); // show Notification
 
         setShowNotification(true); // remove Notification again after css animation completes
         // this allows it to be shown again next time the form is submitted
@@ -47146,7 +47159,9 @@ function App() {
       }
     }, /*#__PURE__*/_react.default.createElement("p", null, "Created by ", /*#__PURE__*/_react.default.createElement("a", {
       href: "http://twitter.com/tjelailah"
-    }, "tjelailah"), " with love \u2764\uFE0F"))), showNotification && /*#__PURE__*/_react.default.createElement(Notification, null))
+    }, "tjelailah"), " with love \u2764\uFE0F"), /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement("a", {
+      href: "https://github.com/jelilat/hellonear/"
+    }, "Github")))), showNotification && /*#__PURE__*/_react.default.createElement(Notification, null))
   );
 } // this component gets rendered by App after the form is submitted
 
@@ -47209,7 +47224,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63588" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50264" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
