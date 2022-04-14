@@ -47028,6 +47028,9 @@ function App() {
       }).then(nameFromContract => {
         set_name(nameFromContract);
       });
+      setImage({
+        src: require('./assets/hello.png')
+      });
     }
   }, // The second argument to useEffect tells React when to re-run the effect
   // Use an empty array to specify "only run on first render"
@@ -47224,7 +47227,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50264" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54897" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
