@@ -46867,14 +46867,21 @@ async function initContract() {
     deps: {
       keyStore: new _nearApiJs.keyStores.BrowserLocalStorageKeyStore()
     }
-  }, nearConfig)); // Initializing Wallet based Account. It can work with NEAR testnet wallet that
+  }, {
+    networkId: 'testnet',
+    nodeUrl: 'https://rpc.testnet.near.org',
+    contractName: 'hellonear.tjelailah.testnet',
+    walletUrl: 'https://wallet.testnet.near.org',
+    helperUrl: 'https://helper.testnet.near.org',
+    explorerUrl: 'https://explorer.testnet.near.org'
+  })); // Initializing Wallet based Account. It can work with NEAR testnet wallet that
   // is hosted at https://wallet.testnet.near.org
 
-  const wallet = new _nearApiJs.WalletConnection(near); // Getting the Account ID. If still unauthorized, it's just empty string
+  window.walletConnection = new _nearApiJs.WalletConnection(near); // Getting the Account ID. If still unauthorized, it's just empty string
 
-  window.accountId = wallet.getAccountId(); // Initializing our contract APIs by contract name and configuration
+  window.accountId = window.walletConnection.getAccountId(); // Initializing our contract APIs by contract name and configuration
 
-  window.contract = await new _nearApiJs.Contract(wallet.account(), nearConfig.contractName, {
+  window.contract = await new _nearApiJs.Contract(window.walletConnection.account(), nearConfig.contractName, {
     // View methods are read only. They don't modify the state, but usually return some value.
     viewMethods: ['get_name'],
     // Change methods can modify the state. But you don't receive the returned value when called.
@@ -46883,7 +46890,7 @@ async function initContract() {
 }
 
 function logout() {
-  wallet.signOut(); // reload page
+  window.walletConnection.signOut(); // reload page
 
   window.location.replace(window.location.origin + window.location.pathname);
 }
@@ -46893,7 +46900,7 @@ function login() {
   // user's behalf.
   // This works by creating a new access key for the user's account and storing
   // the private key in localStorage.
-  wallet.requestSignIn(nearConfig.contractName);
+  window.walletConnection.requestSignIn(nearConfig.contractName);
 }
 },{"near-api-js":"../node_modules/near-api-js/lib/browser-index.js","./config":"config.js"}],"assets/hello.png":[function(require,module,exports) {
 module.exports = "/hello.2741c2c9.png";
